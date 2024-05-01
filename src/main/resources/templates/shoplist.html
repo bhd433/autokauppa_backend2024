@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Myyjälista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Kirjaudu ulos" class="btn btn-danger"/>
+    </form>
+
+
+    <h1>Listan myyjistä näet täällä</h1>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Myyjän nimi</th>
+                <th>Myyjän osoite</th>
+            </tr>
+            <tr th:each="shop : ${kaupat}">
+                <td th:text="${shop.nimi}">
+                <td th:text="${shop.osoite}">
+                <td>
+                    <a th:href="@{/shopcars/{id}(id=${shop.kauppaid})}"  class="btn btn-info">
+                            <span th:text="${shop.nimi} + ' autot'"></span>
+                    </a>
+                </td>
+                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/editshop/{id}(id=${shop.kauppaid})}" class="btn btn-info">Muokkaa myyjän tietoja</a></td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <a href="/addshop" sec:authorize="hasRole('ADMIN')" class="btn btn-success">Lisää uusi myyjä</a>
+    <br>
+    <br>
+    <a th:href="@{/carlist}" class="btn btn-info">Lista autoista</a>
+
+    <!--sec:authorize="hasRole('ADMIN')"--> 
+
+</body>
+
+</html>

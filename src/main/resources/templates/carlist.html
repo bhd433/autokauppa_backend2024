@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Autolista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Kirjaudu ulos" class="btn btn-danger"/>
+    </form>
+
+
+    <h1>Listan autoista näet täällä</h1>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Merkki</th>
+                <th>Malli</th>
+                <th>Vuosimalli</th>
+                <th>Hinta</th>
+                <th>Myyjä</th>
+                <th>Myyjän osoite</th>
+            </tr>
+            <tr th:each="car : ${cars}">
+                <td th:text="${car.brand}">
+                <td th:text="${car.model}">
+                <td th:text="${car.carYear}">
+                <td th:text="${car.price}">
+                <td th:text="${car.kauppa.nimi}">
+                <td th:text="${car.kauppa.osoite}"></td>
+                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/editcar/{id}(id=${car.id})}" class="btn btn-info">Muokkaa auton tietoja</a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletecar/{id}(id=${car.id})}" class="btn btn-danger"
+                    onclick="return confirm('Haluatko varmasti poistaa tämän auton?')">Poista auto</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/addcar" sec:authorize="hasRole('ADMIN')" class="btn btn-success">Lisää auto</a>
+    <br>
+    <br>
+    <a th:href="@{/shoplist}" class="btn btn-info">Lista myyjistä</a>
+
+</body>
+
+</html>

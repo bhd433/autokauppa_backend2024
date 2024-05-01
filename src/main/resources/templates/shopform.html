@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Muokkaa/Lisää myyjä</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Aseta myyjän tiedot</h1>
+    <div>
+        <form action="#" method="post" th:object="${shop}" th:action="@{/saveshop}">
+
+            <input type="hidden" th:field="*{kauppaid}" />
+            <input type="text" id="nimi" th:field="*{nimi}" placeholder="Nimi"/>
+            <input type="text" id="osoite" th:field="*{osoite}" placeholder="Osoite"/>
+
+
+            <input type="submit" value="Save" class="btn btn-success"></input>
+        </form>
+    </div>
+</body>
+
+</html>

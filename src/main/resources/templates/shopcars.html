@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Täällä näet myyjän autot</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h3 th:text="'Kaikki myyjän: ' + ${shop.nimi} + ' autot'"></h3>
+    
+    
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Merkki</th>
+                <th>Malli</th>
+                <th>Vuosimalli</th>
+                <th>Hinta</th>
+            </tr>
+            <tr th:each="car : ${cars}">
+                <td th:text="${car.brand}">
+                <td th:text="${car.model}">
+                <td th:text="${car.carYear}">
+                <td th:text="${car.price}">
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3 th:text="'Myyjän osoite on ' + ${shop.osoite}"></h3>
+    <br>
+    <a th:href="@{/shoplist}"><button class="btn btn-info">Lista myyjistä</button>  </a>
+</body>
+</html>

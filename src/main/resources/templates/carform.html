@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Muokkaa/Lisää auto</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .form-group label {
+            width: 120px; /* Adjust as needed */
+            margin-right: 10px;
+            text-align: right;
+        }
+        
+        .form-group input,
+        .form-group select {
+            flex: 1;
+            max-width: 200px; /* Adjust as needed */
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Aseta auton tiedot</h1>
+    <div>
+        <form action="#" method="post" th:object="${car}" th:action="@{/savecar}" class="form-inline">
+
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label for="merkki">Merkki:</label>
+                <input type="text" id="merkki" th:field="*{brand}" placeholder="Merkki"/>
+            </div>
+            <div class="form-group">
+                <label for="malli">Malli:</label>
+                <input type="text" id="malli" th:field="*{model}" placeholder="Malli"/>
+            </div>
+            <div class="form-group">
+                <label for="vuosimalli">Vuosimalli:</label>
+                <input type="text" id="vuosimalli" th:field="*{carYear}" placeholder="Vuosimalli" value="Vuosimalli"/>
+            </div>
+            <div class="form-group">
+                <label for="hinta">Hinta:</label>
+                <input type="text" id="hinta" th:field="*{price}" placeholder="Hinta" value="Hinta"/>
+            </div>
+            <div class="form-group">
+                <label for="kauppalist">Myyjä:</label>
+                <select id="kauppalist" th:field="*{kauppa}" class="form-control">
+                    <option value="" selected>Valitse myyjä</option>
+                    <option th:each="kauppa : ${kaupat}" th:value="${kauppa.kauppaid}" th:text="${kauppa.nimi}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
